@@ -202,13 +202,15 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
-  button.style.padding = "  0px"; 
-  button.style.fontSize = "25px"; 
-  button.style.paddingLeft = "60px";
-  button.style.paddingRight = "60px";
+  button.addEventListener("touchstart", (event) => {
+    event.preventDefault();
+    handleButtonPress(keyCode);
+  });
 
-  button.addEventListener("mousedown", () => handleButtonPress(keyCode));
-  button.addEventListener("mouseup", () => handleButtonRelease(keyCode));
+  button.addEventListener("touchend", (event) => {
+    event.preventDefault();
+    handleButtonRelease(keyCode);
+  });
 
   return button;
 }
