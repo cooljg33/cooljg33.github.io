@@ -55,7 +55,7 @@ scoreDisplay.innerText = `Score: ${score}`;
 document.body.appendChild(scoreDisplay);
 
 function addFruit() {
-  const index = Math.floor(Math.random() * 5);
+  const index = 8;
   const fruit = FRUITS[index];
   
   const body = Bodies.circle(300, 50, fruit.radius, {
@@ -202,10 +202,10 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
-  button.style.padding = "30px"; // 내부 여백
-  button.style.fontSize = "41px"; // 글자 크기
-  button.style.paddingLeft = "90px";
-  button.style.paddingRight = "90px";
+  button.style.padding = "  0px"; 
+  button.style.fontSize = "25px"; 
+  button.style.paddingLeft = "60px";
+  button.style.paddingRight = "60px";
 
   button.addEventListener("mousedown", () => handleButtonPress(keyCode));
   button.addEventListener("mouseup", () => handleButtonRelease(keyCode));
