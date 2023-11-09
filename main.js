@@ -202,6 +202,9 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
+  button.style.paddingLeft = "60px";
+  button.style.paddingRight = "60px";
+
   button.addEventListener("touchstart", (event) => {
     event.preventDefault();
     handleButtonPress(keyCode);
