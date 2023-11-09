@@ -189,5 +189,43 @@ function onGameOver() {
   scoreDisplay.style.transform = "translate(-50%, -50%)";
 }
 
+const leftBtn = createButton("<", "ArrowLeft");
+const downBtn = createButton("v", "ArrowDown");
+const rightBtn = createButton(">", "ArrowRight");
+
+document.body.appendChild(leftBtn);
+document.body.appendChild(downBtn);
+document.body.appendChild(rightBtn);
+
+function createButton(text, keyCode) {
+  const button = document.createElement("button");
+  button.className = "control-btn";
+  button.innerText = text;
+
+  button.style.padding = "30px"; // 내부 여백
+  button.style.fontSize = "41px"; // 글자 크기
+  button.style.paddingLeft = "90px";
+  button.style.paddingRight = "90px";
+
+  button.addEventListener("mousedown", () => handleButtonPress(keyCode));
+  button.addEventListener("mouseup", () => handleButtonRelease(keyCode));
+
+  return button;
+}
+
+function handleButtonPress(keyCode) {
+  if (disableAction) {
+    return;
+  }
+
+  const keydownEvent = new KeyboardEvent("keydown", { code: keyCode });
+  window.dispatchEvent(keydownEvent);
+}
+
+function handleButtonRelease(keyCode) {
+  const keyupEvent = new KeyboardEvent("keyup", { code: keyCode });
+  window.dispatchEvent(keyupEvent);
+}
+
 
 addFruit();
