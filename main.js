@@ -234,3 +234,31 @@ function handleButtonRelease(keyCode) {
 
 
 addFruit();
+
+const gameContainer = document.getElementById("game-container");
+
+gameContainer.addEventListener("touchstart", handleTouchStart);
+gameContainer.addEventListener("touchend", handleTouchEnd);
+
+function handleTouchStart(event) {
+  event.preventDefault();
+
+  const touch = event.touches[0];
+  const touchX = touch.clientX;
+  const touchY = touch.clientY;
+
+  if (touchX < gameContainer.offsetWidth / 3) {
+    handleButtonPress("ArrowLeft");
+  } else if (touchX > (gameContainer.offsetWidth / 3) * 2) {
+    handleButtonPress("ArrowRight");
+  } else {
+    handleButtonPress("ArrowDown");
+  }
+}
+function handleTouchEnd(event) {
+  event.preventDefault();
+
+  handleButtonRelease("ArrowLeft");
+  handleButtonRelease("ArrowDown");
+  handleButtonRelease("ArrowRight");
+}
