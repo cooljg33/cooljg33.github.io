@@ -48,6 +48,8 @@ let disableAction = false;
 let interval = null;
 let score = 0; 
 let gameOver = false;
+let finalScore = 0;
+
 
 const scoreDisplay = document.createElement("div"); 
 scoreDisplay.id = "score-display";
@@ -55,7 +57,7 @@ scoreDisplay.innerText = `Score: ${score}`;
 document.body.appendChild(scoreDisplay);
 
 function addFruit() {
-  const index = Math.floor(Math.random() * 5);
+  const index = 8;
   const fruit = FRUITS[index];
   
   const body = Bodies.circle(300, 50, fruit.radius, {
@@ -179,6 +181,8 @@ function onGameOver() {
   World.remove(world, world.bodies.filter(body => body.render.sprite));
   gameOver = true; 
   const finalScore = score; 
+  saveScoreToLocalStorage(finalScore);
+  showRanking();
   scoreDisplay.innerText = `Final Score: ${finalScore}`;
   scoreDisplay.style.fontSize = "50px";
   scoreDisplay.style.color = "red"; 
@@ -187,6 +191,7 @@ function onGameOver() {
   scoreDisplay.style.top = "20%";
   scoreDisplay.style.left = "34%";
   scoreDisplay.style.transform = "translate(-50%, -50%)";
+  
 }
 
 const leftBtn = createButton("", "ArrowLeft");
@@ -202,7 +207,7 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
-  button.style.width = "33.33%";
+  button.style.width = "160px";
   button.style.height = "40px"
 
   button.addEventListener("touchstart", (event) => {
@@ -248,3 +253,42 @@ rightBtn.style.whiteSpace = "nowrap";
 gameContainer.style.display = "flex";
 gameContainer.style.justifyContent = "space-between";
 gameContainer.style.alignItems = "center";
+
+function showFinalScore() {
+  const finalScoreDisplay = document.createElement("div");
+  finalScoreDisplay.id = "final-score-display";
+  finalScoreDisplay.innerText = `Final Score: ${finalScore}`;
+  document.body.appendChild(finalScoreDisplay);
+}
+
+function showRanking() {
+  const rankingContainer = document.createElement("div");
+  rankingContainer.id = "ranking-container";
+
+  const rankingData = getRankingData();
+
+  for (let i = 0; i < 5; i++) {
+    const rankItem = document.createElement("div");
+    rankItem.className = "rank-item";
+    rankItem.innerText = `${i + 1}등: ${rankingData[i] || 0}점`;
+    rankingContainer.appendChild(rankItem);
+  }
+
+  document.body.appendChild(rankingContainer);
+}
+
+showFinalScore();
+showRanking();
+
+function saveScoreToLocalStorage(score) {
+  const rankingData = getRankingData();
+  rankingData.push(score);
+  rankingData.sort((a, b) => b - a);
+  rankingData.splice(5);
+  localStorage.setItem("rankingData", JSON.stringify(rankingData));
+}
+
+function getRankingData() {
+  const rankingDataString = localStorage.getItem("rankingData");
+  return rankingDataString ? JSON.parse(rankingDataString) : [];
+}
