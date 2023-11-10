@@ -189,9 +189,9 @@ function onGameOver() {
   scoreDisplay.style.transform = "translate(-50%, -50%)";
 }
 
-const leftBtn = createButton("<", "ArrowLeft");
-const downBtn = createButton("v", "ArrowDown");
-const rightBtn = createButton(">", "ArrowRight");
+const leftBtn = createButton("", "ArrowLeft");
+const downBtn = createButton("", "ArrowDown");
+const rightBtn = createButton("", "ArrowRight");
 
 document.body.appendChild(leftBtn);
 document.body.appendChild(downBtn);
@@ -202,8 +202,7 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
-  button.style.paddingLeft = "90px";
-  button.style.paddingRight = "90px";
+  button.style.width = "33.33%";
   button.style.height = "40px"
 
   button.addEventListener("touchstart", (event) => {
@@ -245,3 +244,7 @@ gameContainer.addEventListener("touchend", handleTouchEnd);
 leftBtn.style.whiteSpace = "nowrap";
 downBtn.style.whiteSpace = "nowrap";
 rightBtn.style.whiteSpace = "nowrap";
+
+gameContainer.style.display = "flex";
+gameContainer.style.justifyContent = "space-between";
+gameContainer.style.alignItems = "center";
