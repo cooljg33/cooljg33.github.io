@@ -202,8 +202,9 @@ function createButton(text, keyCode) {
   button.className = "control-btn";
   button.innerText = text;
 
-  button.style.paddingLeft = "60px";
-  button.style.paddingRight = "60px";
+  button.style.paddingLeft = "90px";
+  button.style.paddingRight = "90px";
+  button.style.height = "40px"
 
   button.addEventListener("touchstart", (event) => {
     event.preventDefault();
@@ -240,25 +241,7 @@ const gameContainer = document.getElementById("game-container");
 gameContainer.addEventListener("touchstart", handleTouchStart);
 gameContainer.addEventListener("touchend", handleTouchEnd);
 
-function handleTouchStart(event) {
-  event.preventDefault();
 
-  const touch = event.touches[0];
-  const touchX = touch.clientX;
-  const touchY = touch.clientY;
-
-  if (touchX < gameContainer.offsetWidth / 3) {
-    handleButtonPress("ArrowLeft");
-  } else if (touchX > (gameContainer.offsetWidth / 3) * 2) {
-    handleButtonPress("ArrowRight");
-  } else {
-    handleButtonPress("ArrowDown");
-  }
-}
-function handleTouchEnd(event) {
-  event.preventDefault();
-
-  handleButtonRelease("ArrowLeft");
-  handleButtonRelease("ArrowDown");
-  handleButtonRelease("ArrowRight");
-}
+leftBtn.style.whiteSpace = "nowrap";
+downBtn.style.whiteSpace = "nowrap";
+rightBtn.style.whiteSpace = "nowrap";
