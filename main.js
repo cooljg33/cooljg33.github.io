@@ -57,7 +57,7 @@ scoreDisplay.innerText = `Score: ${score}`;
 document.body.appendChild(scoreDisplay);
 
 function addFruit() {
-  const index = 8;
+  const index = Math.floor(Math.random() * 5);
   const fruit = FRUITS[index];
   
   const body = Bodies.circle(300, 50, fruit.radius, {
